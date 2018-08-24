@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>泸沽湖</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!--css-->
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../fonts/style.css">
+    <link rel="stylesheet" href="../../css/myInfo.css">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/2.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-datetimepicker.min.css">
+    <!--js-->
+    <script src="../../js/jquery.min.js"></script>
+    <script src='../../js/fontsize.js'></script>
+    <script src="../../js/bootstrap-datetimepicker.min.js"></script>
+</head>
+
+<body>
+    <div id="hotelDetail">
+        <div class="top">
+            <img src="../../images/hoteldetail.png" alt="">
+            <img class='shadow' src="../../images/shadow.png" alt="">
+            <p class='detailtitle'>泸沽湖同策戴斯大酒店
+                <span>高档型</span>
+                <span>2017年开业</span>
+            </p>
+        </div>
+        <div class="comment">
+            <p class='ping'>
+                <span>
+                    <strong>4.5</strong>分</span> 158条点评
+                <router-link class='fr' to='/comment'>点评</router-link>
+            </p>
+            <p class='address'>阿诗玛北路（阿诗玛转台旁）
+                <router-link class='fr' to='/comment'>地图</router-link>
+            </p>
+        </div>
+      
+        <div class="detailList">
+            <div class="toplist">
+                <div class="cell pad30 font34 bcfff">
+                    <span>入住时间</span>
+                    <input type="text" id="startDate" name="reservatTime" placeholder="请选择入住时间" readonly class="form_datetime" >
+                </div>
+                <div class="cell pad30 font34 bcfff" style="margin-left: .3rem">
+                    <span>离开时间</span>
+                    <input type="text" id="endDate" name='leaveTime' placeholder="请选择离开时间" readonly class="form_datetime" >
+                </div>
+            </div>
+            <ul>
+                <li class='contentlist'>
+                    <img src="../../images/detaillist.png" alt="酒店房型">
+                    <div class="listR">
+                        <div class="listcon">
+                            <p>标准景观双床房 </p>
+                            <span>27m2 大床 8-17层</span>
+                        </div>
+                        <div class="price">
+                            <p>
+                                <span>￥</span>
+                                <strong>321</strong> 起</p>
+                            <span class='reserve'>预定</span>
+                        </div>
+                    </div>
+                </li>
+                <li class='contentlist'>
+                    <img src="../../images/detaillist.png" alt="">
+                    <div class="listR">
+                        <div class="listcon">
+                            <p>标准景观双床房 </p>
+                            <span>27m2 大床 8-17层</span>
+                        </div>
+                        <div class="price">
+                            <p>
+                                <span>￥</span>
+                                <strong>321</strong> 起</p>
+                            <span class='reserve'>预定</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="details">
+            <h5>酒店设施</h5>
+            <div class="hotelD"></div>
+            <h5>酒店政策</h5>
+            <div class="hotelD"></div>
+            <h5>儿童与加床 </h5>
+            <div class="hotelD"></div>
+            <h5>膳食安排 </h5>
+            <div class="hotelD"></div>
+            <h5>宠物 </h5>
+            <div class="hotelD"></div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            var bool = false;
+            function toSubmit() {
+                // 		$('form').submit(function(){
+                if ($("#endDate").val() == '') {
+                    showMsg('请选择离店时间！');
+                    bool = false;
+                    return bool;
+                } else {
+                    bool = true;
+                }
+                if (bool) {
+                    var sdate = new Date($("#startDate").val());
+                    var edate = new Date($("#endDate").val());
+
+                }
+                // 		});
+            }
+            var obj;
+            // var id = ${roomId};
+            // var sdate = new Date();
+            var sdate = '2018-07-04';
+            // $.post('../hotel/roomOrder',{id:id},function(data){
+            //   if(data.code==1000){
+            //     if(data.result.hotelOrder.leaveTime != undefined){
+            //       if(data.result.hotelOrder.leaveTime.time > new Date().getTime()){
+            //         sdate = new Date(data.result.hotelOrder.leaveTime.time);
+            //       }
+            //     }
+            //   }
+
+            // 	alert(sdate);
+            //     $.post('../hotel/reservatTime',{id:id},function(data){
+            //       obj = data.result;
+            obj = ['2018-07-12', '2018-07-13', '2018-07-20'];//禁用日期可以从数据库查
+            // 	自定义格式
+            $.fn.datetimepicker.dates['zdy'] = {
+                days: ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"],
+                daysShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+                daysMin: ["日", "一", "二", "三", "四", "五", "六"],
+                months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+                today: "今天",
+                format: "yyyy-mm-dd",
+                titleFormat: "yyyy-mm-",
+                weekStart: 1,
+                suffix: [],
+                meridiem: ["上午", "下午"]
+            };
+            $('#startDate').datetimepicker({
+                language: 'zdy',
+                weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                startDate: sdate,
+                minView: 2,
+                maxView: 3,
+                onRenderDay: function (date) {
+                    // 	    	alert(date);
+                    var date1 = date.getFullYear() + '-'
+                        + (date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1)
+                        + '-'
+                        + (date.getDate() < 10 ? '0' + (date.getDate() - 1) : date.getDate() - 1);
+                    // for(var o in obj){
+                    //   if(date1==obj[o]){
+                    //     return ['disabled'];
+                    //   }
+                    // }
+
+                }
+            }).on('changeDate', function (ev) {
+                // 		alert($("#startDate").val());
+                $('#endDate').datetimepicker('remove');
+                $('#endDate').val('');
+                var sdate = $("#startDate").val();
+                var edate;
+                for (var o in obj) {
+                    if (new Date(sdate) <= new Date(obj[o])) {
+                        var date = new Date(obj[o])
+                        var ndate = +date + 24 * 60 * 60 * 1000;
+                        var leaveTime = new Date(ndate);
+                        edate = leaveTime.getFullYear() + '-' + (leaveTime.getMonth() + 1) + '-' + leaveTime.getDate();
+
+                        break;
+                    }
+                }
+                // 			alert(edate);
+                $('#endDate').datetimepicker({
+                    language: 'zdy',
+                    weekStart: 1,
+                    todayBtn: 1,
+                    autoclose: 1,
+                    startDate: sdate,
+                    endDate: edate,
+                    minView: 2,
+                    maxView: 3
+                }).on('changeDate', function (ev) {
+                    // 		            alert(o+++"~~")
+                });
+            });
+            // });
+            // });
+            $("#endDate").click(function () {
+                if ($("#startDate").val() != '') {
+
+                } else {
+                    showMsg('请先选择入住时间！');
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

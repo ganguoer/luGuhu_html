@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>泸沽湖</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection"content="email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!--css-->
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../fonts/style.css">
+    <link rel="stylesheet" href="../../css/myInfo.css">
+    <!--js-->
+    <script src='../../js/fontsize.js'></script>
+    <script src='../../js/jquery.min.js'></script>
+</head>
+<body>
+<!--顶部-->
+<div id ='header'>
+    <span onclick="window.history.go(-1)" class='icon-left-21 rotate'></span>
+    <p>通知</p>
+</div>
+<!--内容部分-->
+<div id ='notify'>
+
+    <div class="tabs">
+        <nav>
+            <a href="javascript:;" data-cont="tab1">平台通知</a>
+            <a href="javascript:;" data-cont="tab2">消息通知</a>
+        </nav>
+        <section class="cont" id="tab1" >
+            <div class="platform">
+                <ul>
+
+                </ul>
+            </div>
+            <!--加载更多按钮-->
+            <div class="js-load-more" onclick="moreList()">加载更多</div>
+            <div class="noMore">已经全部加载完成！</div>
+        </section>
+        <section class="cont" id="tab2">
+            <div class="all">
+                <ul>
+
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    //  点击导航，实现切换
+    //  key 表示的当前显示的是第几个
+    (function(key){
+//         获取所有的导航
+        var navs=document.querySelectorAll('nav a');
+//         遍历 给导航 绑定事件，并且添加当前样式
+        for(var i=0;i<navs.length;i++){
+//            如果是用户指定的当前样式
+            if(key==i){
+                navs[i].classList.add('active');
+//              拿到要显示内容section的id
+                var secId=navs[i].dataset['cont'];
+//               获取对应的section标签
+                document.querySelector('#'+secId).style.display='block';
+            }
+
+//            给每一个导航绑定点击事件
+            navs[i].onclick=function(){
+                // 排他
+                // 之前有active样式的清除, 之前显示的section 隐藏
+                var  currentNav=document.querySelector('.active');
+//                获取对应的内容区域 ，让其隐藏
+                var currentId=currentNav.dataset['cont'];
+//                去掉导航的active 样式
+                currentNav.classList.remove('active');
+//                对应的内容区域
+                document.querySelector('#'+currentId).style.display='none';
+
+                //   突出显示自己 导航添加样式  对应的section 显示
+//                给自己添加active样式
+                this.classList.add('active');
+//                对应的section模块显示出来
+                var myId=this.dataset['cont'];
+                document.querySelector('#'+myId).style.display='block';
+            }
+        }
+
+
+
+//        数据渲染
+
+        $.ajax({
+            url:"../../data/notify.js",
+            type : "get",
+            data:{"page":1},
+            success:function(result){
+                console.log(result);
+                var data =eval('(' + result + ')');
+                console.log(data);
+
+                var orderList1 = '';
+                $.each(data, function (index, val) {
+                    orderList1 += ' <li class="platformList">' +
+                        '<p class="date">'+val.times + '</p>' +
+                        '<h3> '+ val.title+'</h3>' +
+                        '<div class="platinfo">'+
+                        '<img src="'+val.srcimg+'"  alt="">' +
+                        '<p style="-webkit-box-orient: vertical; ">' +
+                        val.descript+'</p>' +
+                        ' </div>' +
+                        '</li>';
+                })
+                $('#tab1 ul').append(orderList1);
+
+                $(".js-load-more").show();
+
+            }
+        });
+
+        $.ajax({
+            url:"../../data/coupon.js",
+            type : "get",
+            data:{"page":1},
+            success:function(result){
+                console.log(result);
+                var data =eval('(' + result + ')');
+                console.log(data);
+
+                var orderList2 = '';
+                $.each(data, function (index, val) {
+                    orderList2 += ' <li class="platformList">' +
+                        '<p class="date">'+val.times + '</p>' +
+                        '<h3> '+ val.title+'</h3>' +
+                        '<div class="platinfo">'+
+                        '<img src="'+val.srcimg+'"  alt="">' +
+                        '<p style="-webkit-box-orient: vertical; ">' +
+                        val.descript+'</p>' +
+                        ' </div>' +
+                        '</li>';
+                })
+                $('#tab2 ul').append(orderList2);
+
+            }
+        });
+
+
+    })(0);
+
+
+    var pageNum = 1;
+    function moreList(){
+        pageNum += 1;
+        $.ajax({
+            url:"../../data/notify.js",
+            type : "get",
+            data:{"page":pageNum},
+            success:function(result){
+                var data =eval('(' + result + ')');
+
+                console.log(data);
+//                var sum = data.length/5;
+                var sum = 3;
+                console.log(sum);
+
+                if (pageNum <= sum) {
+                    $(".js-load-more").show();
+                    $(".noMore").hide();
+                } else {
+                    $(".js-load-more").hide();
+                    $(".noMore").show();
+                }
+
+                var orderList1 = '';
+
+                //        数据渲染
+                $.each(data, function (index, val) {
+                    orderList1 += ' <li class="platformList">' +
+                        '<p class="date">'+val.times + '</p>' +
+                        '<h3> '+ val.title+'</h3>' +
+                        '<div class="platinfo">'+
+                        '<img src="'+val.srcimg+'"  alt="">' +
+                        '<p style="-webkit-box-orient: vertical; ">' +
+                        val.descript+'</p>' +
+                        ' </div>' +
+                        '</li>';
+                });
+
+                $('#tab1 ul').append(orderList1);
+
+
+            },
+            error: function(xhr, type){
+                alert('Ajax error!');
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>

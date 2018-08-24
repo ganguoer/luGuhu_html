@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>泸沽湖</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection"content="email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!--css-->
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./fonts/style.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <!--js-->
+    <script src='./js/fontsize.js'></script>
+</head>
+<body>
+<div class='login'>
+    <div class="header">
+        <p>登录</p>
+    </div>
+    <div class="login-wrap" v-show="showLogin">
+        <div class='bgf'>
+            <div class='tele clearfix'>
+                <label for="" class='fl'>手机号</label> <input type="text" placeholder="注册或绑定手机号"  maxlength="20">
+            </div>
+            <div class='tele clearfix'>
+                <label for="" class='fl'>动态码</label> <input type="password" placeholder="短信动态码"  maxlength="10">  <span class='fr getCode'>获取动态码</span>
+            </div>
+        </div>
+
+        <button onclick="login">登录</button>
+        <div class='wx'>
+            <span class='icon-1-20'></span>
+            <span onclick="ToRegister">使用微信账号登录</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

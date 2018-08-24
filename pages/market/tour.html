@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>泸沽湖</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection"content="email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!--css-->
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../fonts/style.css">
+    <link rel="stylesheet" href="../../css/myInfo.css">
+    <!--js-->
+    <script src='../../js/fontsize.js'></script>
+    <script src='../../js/jquery.min.js'></script>
+</head>
+<body>
+<!--顶部-->
+<div id ='header'>
+    <p>导游列表</p>
+</div>
+<!--内容部分-->
+<div id="tour">
+    <!--搜索部分-->
+    <div class="seardh">
+        <span class="icon-1-15"></span>
+        <input type="search" placeholder='导游/景区'  class='search'>
+    </div>
+
+    <ul>
+
+    </ul>
+
+</div>
+
+<div id="footer">
+    <a href="#">
+        <span  class='icon-1-07'> </span>
+        <p>首页</p>
+    </a>
+    <a href="#">
+        <span  class='icon-1-08'> </span>
+        <p>资讯</p>
+    </a>
+    <a href="./market.html">
+        <span  class='icon-1-09'> </span>
+        <p>微商城</p>
+    </a>
+    <a href="#">
+        <span  class='icon-1-10'> </span>
+        <p>自导</p>
+    </a>
+    <a href="../my/my.html">
+        <span  class='icon-1-11'> </span>
+        <p>我的</p>
+    </a>
+    <div class="mark"></div>
+</div>
+
+
+<script>
+
+    (function(){
+//        加载更多
+        $.ajax({
+            url:"../../data/tour.js",
+            type : "get",
+            data:{"page":1},
+            success:function(result){
+                console.log(result);
+                var data =eval('(' + result + ')');
+                console.log(data);
+
+                var orderList1 = '';
+                $.each(data, function (index, val) {
+
+                    var stars='';
+                    for(var i=0;i<val.startnumber;i++){
+                        stars+='<span class="icon-1-21"></span>'
+                    }
+
+
+                    orderList1 += '<li class="scenicList clearfix">' +
+                        '<a class="scenic_a" href="./tourDetail.html">'+
+                        '<img src="'+val.img+'"  alt="导游图片">' +
+                        '<div class="conlist">'+
+                        '<div class="conlistL">'+
+                        '<p class="title">'+val.name + '</p>' +
+                        '<p class="descript">'+
+                        '<span class="numberSale">销量：<em>'+val.salenumber + '</em></span>' +
+                        '<span class="lines">|</span> <span class="satisfaction">满意度：<em>'+val.agree + '</em></span></p>' +
+                        '<p class="star">'+
+                        stars +
+                        '<strong>'+val.startnumber + '分</strong>' +
+                        '</p>' +
+                        ' </div>' +
+                        '<div class="conlistR">'+
+                        '<span>￥</span><strong>'+val.price+'</strong>'+
+                        ' </div>' +
+                        ' </div>' +
+                        ' </a>' +
+                        '</li>';
+                })
+                $(' ul').append(orderList1);
+
+            }
+        });
+
+
+
+    })(0);
+
+    //    var pageNum = 1;
+    //    function moreList(){
+    //        pageNum += 1;
+    //        $.ajax({
+    //            url:"../../data/notify.js",
+    //            type : "get",
+    //            data:{"page":pageNum},
+    //            success:function(result){
+    //                var data =eval('(' + result + ')');
+    //
+    //                console.log(data);
+    ////                var sum = data.length/5;
+    //                var sum = 3;
+    //                console.log(sum);
+    //
+    //                if (pageNum <= sum) {
+    //                    $(".js-load-more").show();
+    //                    $(".noMore").hide();
+    //                } else {
+    //                    $(".js-load-more").hide();
+    //                    $(".noMore").show();
+    //                }
+    //
+    //                var orderList1 = '';
+    //
+    //                //        数据渲染
+    //                $.each(data, function (index, val) {
+    //                    orderList1 += ' <li class="platformList">' +
+    //                        '<p class="date">'+val.times + '</p>' +
+    //                        '<h3> '+ val.title+'</h3>' +
+    //                        '<div class="platinfo">'+
+    //                        '<img src="'+val.srcimg+'"  alt="">' +
+    //                        '<p style="-webkit-box-orient: vertical; ">' +
+    //                        val.descript+'</p>' +
+    //                        ' </div>' +
+    //                        '</li>';
+    //                });
+    //
+    //                $('#tab1 ul').append(orderList1);
+    //
+    //
+    //            },
+    //            error: function(xhr, type){
+    //                alert('Ajax error!');
+    //            }
+    //        });
+    //
+    //    }
+
+</script>
+</body>
+</html>

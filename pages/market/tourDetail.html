@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>泸沽湖</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection"content="email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!--css-->
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../fonts/style.css">
+    <link rel="stylesheet" href="../../css/myInfo.css">
+    <!--js-->
+    <script src='../../js/fontsize.js'></script>
+    <script src='../../js/jquery.min.js'></script>
+</head>
+<body>
+<!--顶部-->
+<div id ='header'>
+    <p>导游详情</p>
+</div>
+<!--内容部分-->
+<div id="tourDetail">
+        <div>
+            <div class="top">
+                <img src="../../images/dydetail.jpg" alt="" class="bigimg">
+                <div class="tourphoto"></div>
+                <div class="photoimg"></div>
+            </div>
+            <p class="tourname"></p>
+            <div class="link clearfix">
+                <div class="lf"><a class="t_tel" href="tel:15932000248"></a></div>
+                <div class="lf weichart"><span class="icon-1-20"></span>微信交谈</div>
+            </div>
+            <div class='descript'>
+                <span class="numberSale"></span>
+                <span class="lines">|</span> <span class="satisfaction"></span>
+                <span class="evaluate"> <em>点评</em> ></span>
+            </div>
+            <div class="details">
+                <div class="cheng">
+                    <div class="chengD clearfix">
+                        <div class="chengDl">
+                            <div class='ctitle'>优惠套餐价</div>
+                            <p class='know'></p>
+                        </div>
+                        <div class="chengDr">
+                            <p class='price'> <span>￥</span><strong class='t_price'></strong> </p>
+                            <div class='reserve'>预订</div>
+                        </div>
+                    </div>
+                    <div class="bg"></div>
+                </div>
+
+                <div class="cheng">
+                    <h5 class='piao'>服务宗旨</h5>
+                    <div class="chengD specisl fwzz" >
+
+                    </div>
+                    <h5 class='piao'>产品详情</h5>
+                    <div class="chengD specisl cpxq" >
+
+                    </div>
+                    <div class="clearfix my-detailtit">
+                        <span class="liness"></span><span class="dot"></span>我的详细资料<span class="dot"></span><span class="liness"></span>
+                    </div>
+                    <div class="clearfix listmsg ziliao" >
+
+                    </div>
+                    <div class="clearfix my-detailtit">
+                        <span class="liness"></span><span class="dot"></span>我的带队宣言<span class="dot"></span><span class="liness"></span>
+                    </div>
+                    <ul class="clearfix listmsg xy" >
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<div id="footer">
+    <a href="#">
+        <span  class='icon-1-07'> </span>
+        <p>首页</p>
+    </a>
+    <a href="#">
+        <span  class='icon-1-08'> </span>
+        <p>资讯</p>
+    </a>
+    <a href="./market.html">
+        <span  class='icon-1-09'> </span>
+        <p>微商城</p>
+    </a>
+    <a href="#">
+        <span  class='icon-1-10'> </span>
+        <p>自导</p>
+    </a>
+    <a href="../my/my.html">
+        <span  class='icon-1-11'> </span>
+        <p>我的</p>
+    </a>
+    <div class="mark"></div>
+</div>
+
+
+<script>
+    
+    (function () {
+
+        $.ajax({
+            url:"../../data/tourdetail.js",
+            type : "get",
+            success:function(result){
+                console.log(result);
+                var data =eval('(' + result + ')');
+                console.log(data);
+
+                var t_img='',t_name='',t_tel='',t_salenumber='',t_agree='',t_know='',t_price='',t_fwzz='',t_cpxq='',t_ziliao='',t_xy='';
+                $.each(data, function (index, val) {
+
+                    t_img = '<img src="'+val.img+'">';
+                    t_name = val.name;
+                    t_tel = '<span class="icon-1-19"></span> '+val.tel;
+                    t_salenumber = '销量：<em>'+val.salenumber+'</em>';
+                    t_agree='满意度：<em>'+val.agree+'</em>';
+                    t_know = val.title;
+                    t_price = val.price;
+                    t_fwzz = val.zongzhi;
+                    t_cpxq = val.prodetail;
+                    t_ziliao = val.ziliao;
+                    t_xy = val.xuanyan;
+
+                })
+                $(' .photoimg').append(t_img);
+                $(' .tourname').append(t_name);
+                $(' .t_tel').append(t_tel);
+                $(' .numberSale').append(t_salenumber);
+                $(' .satisfaction').append(t_agree);
+                $(' .know').append(t_know);
+                $(' .t_price').append(t_price);
+                $(' .fwzz').append(t_fwzz);
+                $(' .cpxq').append(t_cpxq);
+                $(' .ziliao').append(t_ziliao);
+                $(' .xy').append(t_xy);
+
+            }
+        });
+
+
+
+    })();
+</script>
+
+</body>
+</html>

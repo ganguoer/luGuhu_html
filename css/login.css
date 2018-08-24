@@ -1,0 +1,84 @@
+
+.header{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:0.8rem;
+    background-color: #333333;
+}
+.header p{
+    font-size: 0.34rem;
+    color: #fff;
+    height:0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+}
+.login{
+    height: 100%;
+    width:100% ;
+    background-color: #efefef;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+.login-wrap{text-align:center;margin-top: 2.07rem;}
+.bgf{
+    background-color: #fff;
+}
+.tele{
+    border-bottom: 1px solid #efefef;
+    padding: 0.3rem 0.26rem;
+}
+label{
+    height:0.4rem;
+    line-height:0.4rem;
+    font-size: 0.28rem;
+    color: #333333;
+}
+input{
+    width:4rem;
+    height:0.4rem;
+    line-height:0.4rem;
+    float: left;
+    outline:none;
+    padding-left:0.4rem;
+    box-sizing:border-box;
+    font-size: 0.28rem;
+    color: #666;
+}
+input::placeholder{
+    font-size: 0.28rem;
+    color: #666;
+}
+.getCode{
+    font-size: 0.24rem;
+    color: #fba207;
+    padding: 0.06rem 0.1rem;
+    border: 1px solid #fba207;
+    border-radius: 0.1rem;
+}
+p{color:red;}
+button{
+    display:block;
+    width:4.64rem;
+    height:0.8rem;
+    line-height: 0.8rem;
+    margin:0 auto;
+    border:none;
+    background-color:#0ca2e1;
+    border-radius: 0.4rem;
+    color:#fff;
+    font-size:0.28rem;
+    margin-bottom:5rem;
+    margin-top: 0.56rem;
+}
+.wx{
+    border-radius: 0.4rem;
+    width: 3.07rem;
+    height: 0.76rem;
+    line-height: 0.76rem;
+    margin: 0 auto;
+    border: 1px solid #0ca2e1;
+}
+span{cursor:pointer; color: #0ca2e1;font-size: 0.24rem}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>泸沽湖</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!--css-->
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../fonts/style.css">
+    <link rel="stylesheet" href="../../css/myInfo.css">
+    <!--js-->
+    <script src="../../js/jquery.min.js"></script>
+    <script src='../../js/fontsize.js'></script>
+    <script src="../../js/dropload.min.js"></script>
+</head>
+
+<body>
+    <div id="hotel">
+        <!--<div class="top">-->
+
+        <!--</div>-->
+        <div class="seardh">
+            <span class="icon-1-15"></span>
+            <input type="search" placeholder='景点名称/目的地' class='search'>
+        </div>
+
+        <div class="hotelList">
+            <ul class="lists">
+                
+            </ul>
+        </div>
+
+        <div class="footfix">
+            <div class='fix priceStart'>价格/星级</div>
+            <div class='fix hydbtn'>欢迎度排序</div>
+            <div class="star_price">
+                <div class='star_b'>
+                    <p>价格(单选)</p>
+                    <div class="select clearfix">
+                        <span class="active">不限</span>
+                        <span>￥150元以下</span>
+                        <span>￥150-￥300</span>
+                        <span>￥301-￥450</span>
+                        <span>￥451-￥600</span>
+                        <span>￥601-￥1000</span>
+                        <span>￥1000以上</span>
+                    </div>
+                    <p>星级(单选)</p>
+                    <div class="selects clearfix">
+                        <span class="actives">不限</span>
+                        <span>快捷连锁</span>
+                        <span>二星级及一下/经济</span>
+                        <span>三星级/舒适</span>
+                        <span>四星级/高档</span>
+                        <span>五星级/豪华</span>
+                    </div>
+                    <div class='isSure'> 确定 </div>
+                </div>
+            </div>
+            <div class="star_prices">
+                <div class="hyd">
+                    <ul>
+                        <li>欢迎度排序</li>
+                        <li>评分 高→低</li>
+                        <li>价格 高→低</li>
+                        <li>价格 低→高</li>
+                        <li>距离 近→远</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+                <a href="#">
+                    <span  class='icon-1-07'> </span>
+                    <p>首页</p>
+                </a>
+                <a href="#">
+                    <span  class='icon-1-08'> </span>
+                    <p>资讯</p>
+                </a>
+                <a href="./market.html">
+                    <span  class='icon-1-09'> </span>
+                    <p>微商城</p>
+                </a>
+                <a href="#">
+                    <span  class='icon-1-10'> </span>
+                    <p>自导</p>
+                </a>
+                <a href="../my/my.html">
+                    <span  class='icon-1-11'> </span>
+                    <p>我的</p>
+                </a>
+                <div class="mark"></div>
+            </div>
+    </div>
+    <script>
+        $(function(){
+            $('.priceStart').bind('click',function(){
+                $('.star_price').show()
+            })
+            $('.star_price').bind('click',function(){
+                $('.star_price').hide()
+            })
+            $('.star_b').bind('click',function(e){
+                if(e.stopPropagation)e.stopPropagation();
+                else e.cancelBubble=true;
+            })
+            $('.select span').bind('click',function(){
+                $('.select span').removeClass('active');
+                $(this).addClass('active');
+            })
+            $('.selects span').bind('click',function(){
+                $('.selects span').removeClass('actives');
+                $(this).addClass('actives');
+            })
+            $('.isSure').bind('click',function(){
+                $('.star_price').hide()
+            })
+            $('.hydbtn').bind('click',function(){
+                $('.star_prices').show()
+            })
+            $('.star_prices').bind('click',function(){
+                $('.star_prices').hide()
+            })
+            $('.hyd').bind('click',function(e){
+                if(e.stopPropagation)e.stopPropagation();
+                else e.cancelBubble=true;
+            })
+            $('.hyd ul li').bind('click',function(e){
+                $('.star_prices').hide()
+            })
+            
+            var counter = 0;
+            // 每页展示5个
+            var num = 5;
+            var pageStart = 0,pageEnd = 0;
+            var ajaxnum = 0;
+            // dropload 
+            $('.hotelList').dropload({
+                scrollArea : window,
+                loadDownFn : function(me){
+                    $.ajax({
+                        type: 'GET',
+                        url: '../../data/hotellist.js',
+                        dataType: 'text',
+                        success: function(data){
+                            var result = '';
+                            counter++;
+                            var datas=eval(data);
+                            pageEnd = num * counter;
+                            pageStart = pageEnd - num;
+                            ajaxnum++;
+                            // console.log(1,astarLi)
+                            for(var i = 0; i < 5; i++){
+                                var strs1="";
+                                for(var j=0;j<datas[i].star;j++){
+                                    strs1 += '<span class="icon-1-21"></span>'
+                                }
+                                result +=   '<li class="hotelL">'+
+                                                '<a class="toHotel">'+
+                                                    '<img src="../../images/hotel.png">'+
+                                                    '<div class="hotelC clearfix">'+
+                                                        '<div class="conL">'+
+                                                            '<p class="title">'+datas[i].title+'</p>'+
+                                                            '<p class="clearfix">'+
+                                                                '<span class="lf">'+datas[i].comment+'</span>'+
+                                                                '<span class=" lf type">'+datas[i].type+'</span>'+
+                                                            '</p>'+
+                                                            '<p class="detail">'+ datas[i].address +'</p>'+
+                                                            '<div class="star">'+strs1+'</div>'+
+                                                        '</div>'+
+                                                        '<div class="conR">'+
+                                                            '￥'+
+                                                            '<strong>'+datas[i].price+'</strong>起'+
+                                                        '</div>'+
+                                                    '</div>'+
+                                                '</a>'+
+                                            '</li>'
+                                if((i + 1) >= data.length){
+                                    // 锁定
+                                    me.lock();
+                                    // 无数据
+                                    me.noData();
+                                    break;
+                                }
+                            }
+                            // 为了测试，延迟1秒加载
+                            $('.lists').append(result);
+                                // 每次数据加载完，必须重置
+                            me.resetload();
+                        },
+                        error: function(xhr, type){
+                            console.log('Ajax error!');
+                            // 即使加载出错，也得重置
+                            me.resetload();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
